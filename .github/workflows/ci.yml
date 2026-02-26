@@ -50,5 +50,10 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Install cargo-deny
+        uses: taiki-e/install-action@v2
+        with:
+          tool: cargo-deny
+
       - name: Dependency audit & license check
-        uses: EmbarkStudios/cargo-deny-action@v2
+        run: cargo deny check
