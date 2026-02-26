@@ -115,13 +115,13 @@ fn is_process_alive(pid: u32) -> bool {
     // Returns 0 if the process exists and we have permission to signal it.
     // Returns -1 with ESRCH if no such process exists.
     // Returns -1 with EPERM if the process exists but we lack permission.
-    unsafe {
-        if libc::kill(pid_i32, 0) == 0 {
-            return true;
-        }
-        // EPERM means the process exists but we can't signal it — still alive.
-        std::io::Error::last_os_error().raw_os_error() == Some(libc::EPERM)
+    // SAFETY: kill(2) with signal 0 is safe for any pid.
+    let ret = unsafe { libc::kill(pid_i32, 0) };
+    if ret == 0 {
+        return true;
     }
+    // EPERM means the process exists but we can't signal it — still alive.
+    std::io::Error::last_os_error().raw_os_error() == Some(libc::EPERM)
 }
 
 #[cfg(windows)]

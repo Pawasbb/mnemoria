@@ -6,7 +6,10 @@
 /// [`embed`](Self::embed) returns an error. This allows the rest of the
 /// system to fall back to BM25-only search.
 pub struct EmbeddingBackend {
+    #[cfg(feature = "model2vec")]
     model: Option<model2vec::Model2Vec>,
+    #[cfg(not(feature = "model2vec"))]
+    model: Option<()>,
 }
 
 impl EmbeddingBackend {
