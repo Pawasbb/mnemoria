@@ -5,11 +5,12 @@ use crate::storage::file_lock::FileLock;
 use crate::storage::log_reader;
 use crate::storage::{LogWriter, Manifest};
 use crate::types::{Config, EntryType, MemoryEntry, MemoryStats, SearchResult, TimelineOptions};
+use atomic_write_file::AtomicWriteFile;
+use rkyv::rancor::Error as RkyvError;
 use std::collections::HashMap;
+use std::io::Write;
 use std::path::{Path, PathBuf};
 use std::sync::Mutex;
-
-use crate::constants::LOG_FILENAME;
 
 const INDEX_COMMIT_BATCH_SIZE: usize = 32;
 const INDEX_DIR_PREFIX: &str = "mnemoria-idx-";
@@ -373,9 +374,6 @@ impl Mnemoria {
         rewritten_entries: &[MemoryEntry],
     ) -> Result<(), crate::Error> {
         let log_path = Manifest::log_path(&self.base_path);
-        let temp_path = self
-            .base_path
-            .join(format!("{LOG_FILENAME}.rewrite.{}.tmp", Self::now_millis()));
 
         {
             let mut writer = lock_mutex(&self.writer)?;
@@ -383,23 +381,15 @@ impl Mnemoria {
         }
 
         {
-            let mut temp_writer = LogWriter::new(&temp_path)?;
+            let mut file = AtomicWriteFile::open(&log_path)?;
             for entry in rewritten_entries {
-                temp_writer.append(entry)?;
+                let encoded = rkyv::to_bytes::<RkyvError>(entry)
+                    .map_err(|e: RkyvError| crate::Error::Serialization(e.to_string()))?;
+                let len = encoded.len() as u32;
+                file.write_all(&len.to_le_bytes())?;
+                file.write_all(&encoded)?;
             }
-            temp_writer.flush()?;
-        }
-
-        std::fs::rename(&temp_path, &log_path)?;
-
-        // On Unix, fsync the parent directory to ensure the rename is durable.
-        // Windows does not support fsyncing directories and NTFS doesn't need it.
-        #[cfg(unix)]
-        {
-            let dir_file = std::fs::OpenOptions::new()
-                .read(true)
-                .open(&self.base_path)?;
-            dir_file.sync_all()?;
+            file.commit()?;
         }
 
         let mut writer = lock_mutex(&self.writer)?;

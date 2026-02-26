@@ -1,5 +1,5 @@
+use atomic_write_file::AtomicWriteFile;
 use serde::{Deserialize, Serialize};
-use std::fs::OpenOptions;
 use std::io::Write;
 use std::path::{Path, PathBuf};
 
@@ -59,39 +59,12 @@ impl Manifest {
 
     pub fn save(&self, base_path: &Path) -> Result<(), crate::Error> {
         let path = Self::path(base_path);
-        let temp_path = base_path.join(format!("{MANIFEST_FILENAME}.tmp"));
         let content = serde_json::to_string_pretty(self)
             .map_err(|e| crate::Error::Serialization(e.to_string()))?;
 
-        let write_result = (|| -> Result<(), crate::Error> {
-            let mut temp_file = OpenOptions::new()
-                .create(true)
-                .write(true)
-                .truncate(true)
-                .open(&temp_path)?;
-
-            temp_file.write_all(content.as_bytes())?;
-            temp_file.flush()?;
-            temp_file.sync_all()?;
-            Ok(())
-        })();
-
-        if let Err(e) = write_result {
-            // Best-effort cleanup of the temp file on write failure.
-            let _ = std::fs::remove_file(&temp_path);
-            return Err(e);
-        }
-
-        std::fs::rename(&temp_path, &path)?;
-
-        // On Unix, fsync the parent directory to ensure the rename is durable.
-        // Windows does not support fsyncing directories (returns ACCESS_DENIED)
-        // and NTFS guarantees rename durability without it.
-        #[cfg(unix)]
-        {
-            let dir_file = OpenOptions::new().read(true).open(base_path)?;
-            dir_file.sync_all()?;
-        }
+        let mut file = AtomicWriteFile::open(&path)?;
+        file.write_all(content.as_bytes())?;
+        file.commit()?;
 
         Ok(())
     }
