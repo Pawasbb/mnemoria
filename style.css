@@ -1,0 +1,420 @@
+.container {
+    max-width: 100%;
+  }
+
+  #judulHeader {
+    background-color: #9e4141;
+    color: #fff;
+    padding-bottom: 1px;
+    padding-top: 10px;
+    margin-bottom: 20px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif ;
+  }
+
+  #judulHeader img {
+height: 30px; 
+margin-right: 10px; 
+size: 15px;
+}
+
+
+  h1 {
+    
+    font-size: 25px;
+    padding-bottom: 10px;
+    background-color: #9e4141;
+    color: white;
+  }
+
+  #jamRealTime {
+    font-size: 18px;
+    font-weight: bold;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+
+  .row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .garis-pembatas-1 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-top: 1px solid #ccc;
+  }
+
+  .garis-pembatas-2 {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-top: 2px solid #5b5b5b;
+  }
+
+  .tulisan-1 {
+    font-size: 30px;
+    color: #333;
+    margin-bottom: 5px;
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+
+  .tulisan-2 {
+    font-size: 16px;
+    color: #595959a7;
+    margin-top: 1px;
+    margin-bottom: 1px;
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+
+  #jamRealTime {
+    font-size: 20px;
+    font-weight: bold;
+    color: #00000058;
+  }
+
+  
+
+  #formContainer {
+  position:relative;
+  bottom: 0px;
+  left: 0;
+  width: 100%;
+  background-color: #f8f9fa; 
+  padding: 20px; 
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  z-index: 999; /* ini jangan dikasi minus, nanti formnya gajalan */
+}
+
+
+  .form-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+
+  .form-group label {
+    width: 150px;
+    margin-right: 5px;
+    text-align: left;
+    font-family: 'Times New Roman', Times, serif;
+  }
+
+ 
+  .container {
+    margin-right: auto;
+    margin-left: auto;
+  
+  }
+
+  .table {
+    margin-bottom: 50px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+
+  th {
+    width: auto;
+    background-color: #cf7070de;
+    color: rgba(255, 255, 255, 0.914);
+    font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-size: 17px;
+  }
+
+  .pengaturan {
+    text-align: left;
+  }
+
+  .pagination-container {
+    text-align: center;
+    margin-top: 20px;
+    margin-bottom: 50px;
+  }
+
+  .pagination {
+    display: inline-block;
+    padding-left: 0;
+    margin: 0;
+    border-radius: .25rem;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  }
+
+  .pagination li {
+    display: inline;
+  }
+
+  .pagination li a {
+    position: relative;
+    float: left;
+    padding: .5rem .75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    color: #a93a36;
+    text-decoration: none;
+    background-color: #fff;
+    border: 1px solid #dee2e6;
+  }
+
+  .pagination .active a {
+    z-index: 3;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+  }
+
+  .pagination .page-item.active .page-link {
+  background-color: rgb(203, 79, 79); 
+  border-color: rgb(203, 79, 79); 
+  color: white; 
+}
+
+  /* Tambahan CSS untuk opsi Show Entries */
+  .show-entries-container {
+    text-align: right;
+    margin-bottom: 10px;
+  }
+
+  .show-entries-container label {
+    margin-right: 10px;
+  }
+
+  /* CSS untuk modal tambah data */
+  .modal-content {
+    background-color: #f5f5f5;
+    border-radius: 5px;
+    margin: auto;
+    padding: 20px;
+  }
+
+  .modal-header {
+    border-bottom: 1px solid #9cbe9b8a;
+  }
+
+  .modal-title {
+    font-weight: bold;
+  }
+
+  .modal-body {
+    text-align: center;
+  }
+
+  /* Success modal */
+  #modalSuccess .modal-title {
+    color: #28a745;
+  }
+
+  #modalSuccess .modal-body p {
+    color: #30804a;
+  }
+
+  /* Update modal */
+  #modalUbahData .modal-title {
+    color: #007bff;
+  }
+
+  #modalUbahData .modal-body p {
+    color: #007bff;
+  }
+
+  /* Delete modal */
+  #modalHapusData .modal-title {
+    color: #dc3545;
+  }
+
+  #modalHapusData .modal-body p {
+    color: #dc3545;
+  }
+
+  /* Error modal */
+  #modalError .modal-title {
+    color: #ffc107;
+  }
+
+  #modalError .modal-body p {
+    color: #ffc107;
+  }
+
+  #modalAfterUbah .modal-content {
+  background-color: #ffffff; /* Warna latar belakang */
+  border-radius: 5px;
+  margin: auto;
+  padding: 20px;
+}
+
+#modalAfterUbah .modal-header {
+  border-bottom: 1px solid #b8daff; /* Warna garis bawah header */
+}
+
+#modalAfterUbah .modal-title {
+  color: #4b98ea; /* Warna teks judul */
+}
+
+#modalAfterUbah .modal-body p {
+  color: #004085; /* Warna teks isi */
+}
+
+#modalAfterUbah .btn-primary {
+  background-color: #007bff; /* Warna latar belakang tombol */
+  border-color: #007bff; /* Warna border tombol */
+  
+}
+
+#modalAfterUbah .btn-primary:hover {
+  background-color: #0056b3; /* Warna latar belakang tombol saat dihover */
+  border-color: #0056b3; /* Warna border tombol saat dihover */
+}
+
+#modalAfterHapus .modal-content {
+  background-color: #fff;
+  border-radius: 5px;
+  margin: auto;
+  padding: 20px;
+}
+
+#modalAfterHapus .modal-header {
+  border-bottom: 1px solid #dc3545; /* Warna garis bawah header */
+}
+
+#modalAfterHapus .modal-title {
+  color: #dc3545; /* Warna teks judul */
+}
+
+#modalAfterHapus .modal-body p {
+  color: #dc3545; /* Warna teks isi */
+}
+
+#modalAfterHapus .btn-primary {
+  background-color: #dc3545; /* Warna latar belakang tombol */
+  border-color: #dc3545; /* Warna border tombol */
+}
+
+#modalAfterHapus .btn-primary:hover {
+  background-color: #c82333; 
+  border-color: #bd2130; 
+}
+
+/* CSS untuk modal data tidak lengkap */
+#modalGaLengkap .modal-content {
+  background-color: #ffffff; /* Warna latar belakang */
+  border-radius: 5px;
+}
+
+#modalGaLengkap .modal-header {
+  border-bottom: 1px solid #dd8a4a; /* Warna garis bawah header */
+}
+
+#modalGaLengkap .modal-title {
+  color: #e7a865; /* Warna teks judul */
+}
+
+#modalGaLengkap .modal-body p {
+  color: #a37a2d; 
+}
+
+#modalGaLengkap .btn-primary {
+  background-color: #ffc107;
+  border-color: #ffc107; /* Warna border tombol */
+}
+
+#modalGaLengkap .btn-primary:hover {
+  background-color: #e0a800;
+  border-color: #d39e00; 
+}
+
+
+  /* Tambahan CSS untuk opsi Show Entries */
+  .show-entries-container {
+    text-align: right;
+    margin-bottom: 10px;
+  }
+
+  .show-entries-container label {
+    margin-right: 10px;
+  }
+
+  /* Tombol-tombol di dalam modal */
+  .btn-primary {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    background-color: #61abca;
+    border-color:       #2e7796;
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #0056b3;
+  }
+
+  .btn-sm {
+padding: 0.25rem 0.5rem;
+font-size: 0.875rem;
+line-height: 1.5;
+border-radius: 0.2rem;
+size: 12px;
+}
+
+
+  .btn-danger {
+    background-color: #e14151;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    border-color: #dc3545;
+
+    margin-left: 10px;
+  }
+
+  .btn-danger:hover {
+    background-color: #c82333;
+    border-color: #bd2130;
+  }
+
+ 
+.btn-hapus {
+  background-color: #d8515e; 
+  color: white; 
+  border: none;
+  padding: 5px 10px; 
+  border-radius: 3px; 
+}
+
+.btn-hapus:hover {
+  background-color: #c82333; 
+  color: white; 
+}
+
+
+.btn-ubah {
+  background-color: #6ea1d8; 
+  color: white; 
+  border: none; 
+  padding: 5px 10px; 
+  border-radius: 3px; 
+}
+
+.btn-ubah:hover {
+  background-color: #0056b3; 
+  color: white; 
+}
+
+
+@media (max-width: 576px) {
+  .btn-hapus,
+  .btn-ubah {
+      margin-bottom: 10px; /* Jarakkan tombol di layar kecil */
+  }
+}
+
+@media (min-width: 577px) {
+  .btn-hapus,
+  .btn-ubah {
+      margin-bottom: 10px; /* Jarakkan tombol di layar kecil */
+  }
+}
+
+
+  #ubahNIM {
+background-color: #e9ecef; /* Warna latar belakang yang lebih gelap */
+color: #495057; /* Warna teks yang lebih gelap */
+}
+
+footer {
+bottom: 0;
+margin-top: 10%;
+flex-grow: inherit;
+}
